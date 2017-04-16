@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Linux 常用命令</title>
+<!-- 2017-04-16 Sun 10:08 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Yang Zongze" />
+<link rel="stylesheet" type="text/css" href="http://orgmode.org/worg/style/worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Linux 常用命令</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Shell 命令</a>
+<ul>
+<li><a href="#sec-1-1">搜索利器 find</a>
+<ul>
+<li><a href="#sec-1-1-1">表达式详解</a>
+<ul>
+<li><a href="#sec-1-1-1-1">Options</a></li>
+<li><a href="#sec-1-1-1-2">Tests</a></li>
+<li><a href="#sec-1-1-1-3">Actions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-1-2">xargs</a>
+<ul>
+<li><a href="#sec-1-2-1">语法</a></li>
+<li><a href="#sec-1-2-2">选项</a>
+<ul>
+<li><a href="#sec-1-2-2-1">输入相关选项</a></li>
+<li><a href="#sec-1-2-2-2">限制相关选项</a></li>
+<li><a href="#sec-1-2-2-3">其他</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-1-3">流编辑器 sed</a></li>
+<li><a href="#sec-1-4">awk</a>
+<ul>
+<li><a href="#sec-1-4-1">命令行选项</a></li>
+<li><a href="#sec-1-4-2">awk 语言</a>
+<ul>
+<li><a href="#sec-1-4-2-1">基础概念</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Shell 命令</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">搜索利器 find</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+语法: <code>find [path...] [expresion]</code>
+</p>
+</div>
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1">表达式详解</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+表达式可以是选项(options)、判断语句(tests)、行为(actions):
+</p>
+<dl class="org-dl">
+<dt> options </dt><dd>影响所有操作, 返回 <code>true</code>.
+</dd>
+<dt> tests </dt><dd>返回 <code>true</code> 或者 <code>false</code>.
+</dd>
+<dt> actions </dt><dd>有副作用, 返回 <code>true</code> 或者 <code>false</code>.
+</dd>
+</dl>
+</div>
+<div id="outline-container-sec-1-1-1-1" class="outline-5">
+<h5 id="sec-1-1-1-1">Options</h5>
+<div class="outline-text-5" id="text-1-1-1-1">
+<dl class="org-dl">
+<dt> <code>-daystart</code> </dt><dd>从今天开始而不是 24 小时之前
+</dd>
+<dt> <code>depth</code> </dt><dd>深度优先
+</dd>
+<dt> <code>-maxdepth &lt;levels&gt;</code> </dt><dd>下降最大深度
+</dd>
+<dt> <code>-mindepth &lt;levels&gt;</code> </dt><dd>忽略小于 <code>&lt;lvevels&gt;</code> 的内容
+</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-sec-1-1-1-2" class="outline-5">
+<h5 id="sec-1-1-1-2">Tests</h5>
+<div class="outline-text-5" id="text-1-1-1-2">
+<p>
+数值参数由以下 3 种
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">+n</td>
+<td class="left">大于 n</td>
+</tr>
+
+<tr>
+<td class="left">-n</td>
+<td class="left">小于 n</td>
+</tr>
+
+<tr>
+<td class="left">n</td>
+<td class="left">精确为 n</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+用在测试时间的测试项后面的例子 (-amin 文件在n分钟前被访问)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-shell">&gt;find . -amin +5      #上次访问时间 &gt; 5min
+&gt;find . -amin -5      #上次访问时间 &lt; 5min
+&gt;find . -amin 5       #上次访问时间 &lt; 6min 并且 &gt; 5min
+</pre>
+</div>
+</div>
+
+<ul class="org-ul"><li><a id="sec-1-1-1-2-1" name="sec-1-1-1-2-1"></a>关于访问和修改时间的选项<br  /><div class="outline-text-6" id="text-1-1-1-2-1">
+<dl class="org-dl">
+<dt> <code>-amin</code> <i>n</i> </dt><dd>文件最后的访问时间在 <i>n</i> 分钟前
+</dd>
+<dt> <code>-anewer</code> <i>file</i> </dt><dd>文件最后访问时间晚于 <i>file</i> 的修改时间
+</dd>
+<dt> <code>-atime</code> <i>n</i> </dt><dd>文件的最后访问时间在 <i>n*24</i> 小时之前
+</dd>
+<dt> <code>-cmin</code> <i>n</i> </dt><dd>文件状态的最后改变时间在 <i>n</i> 分钟前
+</dd>
+<dt> <code>-cnewer</code> <i>file</i> </dt><dd>类似于 <code>-anewer</code> <i>file</i>
+</dd>
+<dt> <code>-ctime</code> <i>n</i> </dt><dd>类似于 <code>-atime</code> <i>n</i>
+</dd>
+<dt> <code>-mmin</code> <i>n</i> </dt><dd>文件的最后修改时间在 <i>n</i> 分钟前
+</dd>
+<dt> <code>-mtime</code> <i>n</i> </dt><dd>类似于 <code>-atime</code> <i>n</i>
+</dd>
+<dt> <code>-newer</code> <i>file</i> </dt><dd>这里不是 <code>newer</code>,  文件修改时间比 <i>file</i> 晚
+</dd>
+<dt> <code>-newerXY</code> <i>reference</i> </dt><dd>比较当前文件和 <i>reference</i> 的时间戳, <code>X</code> 和 <code>Y</code> 是
+占位符, 可以是以下符号
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">a</td>
+<td class="left">访问时间</td>
+</tr>
+
+<tr>
+<td class="left">B</td>
+<td class="left">创建时间</td>
+</tr>
+
+<tr>
+<td class="left">c</td>
+<td class="left">inode 状态改变时间</td>
+</tr>
+
+<tr>
+<td class="left">m</td>
+<td class="left">修改时间</td>
+</tr>
+
+<tr>
+<td class="left">t</td>
+<td class="left"><i>reference</i> 表示时间</td>
+</tr>
+</tbody>
+</table>
+</dd>
+
+<dt> <code>-used</code> <i>n</i> </dt><dd>文件最后一次访问时间在其状态改变 <i>n</i> 天之后
+</dd>
+</dl>
+</div>
+</li>
+
+<li><a id="sec-1-1-1-2-2" name="sec-1-1-1-2-2"></a>文件类型和大小的选项<br  /><div class="outline-text-6" id="text-1-1-1-2-2">
+<dl class="org-dl">
+<dt> <code>-empty</code> </dt><dd>文件为空并且是正常文件(regular file)或路径
+</dd>
+<dt> <code>-exectuable</code> </dt><dd>匹配可执行文件和可搜索路径
+</dd>
+<dt> <code>-fstype</code> <i>type</i> </dt><dd>文件在类型为 <i>type</i> 的文件系统上
+</dd>
+<dt> <code>-type</code> <i>c</i> </dt><dd>文件类型位 <i>c</i>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">符号</th>
+<th scope="col" class="left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">b</td>
+<td class="left">block (buffered) special</td>
+</tr>
+
+<tr>
+<td class="left">c</td>
+<td class="left">character (unbuffered) special</td>
+</tr>
+
+<tr>
+<td class="left">d</td>
+<td class="left">路径</td>
+</tr>
+
+<tr>
+<td class="left">p</td>
+<td class="left">命名管道 (named pipe (FIFO))</td>
+</tr>
+
+<tr>
+<td class="left">f</td>
+<td class="left">正常文件 (regular file)</td>
+</tr>
+
+<tr>
+<td class="left">l</td>
+<td class="left">符号链接</td>
+</tr>
+
+<tr>
+<td class="left">s</td>
+<td class="left">套接字(socket)</td>
+</tr>
+
+<tr>
+<td class="left">D</td>
+<td class="left">door (Solaris)</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+</li>
+
+<li><a id="sec-1-1-1-2-3" name="sec-1-1-1-2-3"></a>权限<br  /><div class="outline-text-6" id="text-1-1-1-2-3">
+<dl class="org-dl">
+<dt> <code>-user</code> <i>uname</i> </dt><dd>文件的拥有者为 <i>uname</i>
+</dd>
+<dt> <code>-gid</code> <i>n</i> </dt><dd>文件的数值组 ID 为 <i>n</i>
+</dd>
+<dt> <code>-group</code> <i>gname</i> </dt><dd>文件属于组 <i>gname</i> (允许数值组 ID)
+</dd>
+<dt> <code>-perm</code> <i>mode</i> </dt><dd>文件权限为 <i>mode</i>
+</dd>
+<dt> <code>-perm</code> <i>-mode</i> </dt><dd>文件权限不低于 <i>mode</i>
+</dd>
+<dt> <code>-perm</code> <i>\/mode</i> </dt><dd>任意 <i>mode</i> 中的权限位被设置均为真
+</dd>
+<dt> <code>-context</code> <i>pattern</i> </dt><dd>(SELinux only) Security contex of the 
+</dd>
+</dl>
+<p>
+file mathes glob <i>pattern</i>
+</p>
+<dl class="org-dl">
+<dt> <code>-readable</code> </dt><dd>文件可读
+</dd>
+<dt> <code>-writable</code> </dt><dd>文件可写
+</dd>
+</dl>
+</div>
+</li>
+
+<li><a id="sec-1-1-1-2-4" name="sec-1-1-1-2-4"></a>文件路径和文件名<br  /><div class="outline-text-6" id="text-1-1-1-2-4">
+<dl class="org-dl">
+<dt> <code>-regex</code> <i>pattern</i> </dt><dd>文件名匹配正则表达式 <i>pattern</i>
+</dd>
+<dt> <code>-path</code> <i>pattern</i> </dt><dd>文件名匹配 shell 模式 <i>pattern</i>
+</dd>
+<dt> <code>-name</code> <i>pattern</i> </dt><dd>文件名(不包括路径) 匹配 shell pattern <i>pattern</i>
+</dd>
+<dt> <code>-iname</code> <i>pattern</i> </dt><dd>类似于 <code>-name</code> <i>pattern</i>, 不过大小写不敏感
+</dd>
+</dl>
+</div>
+</li></ul>
+</div>
+
+<div id="outline-container-sec-1-1-1-3" class="outline-5">
+<h5 id="sec-1-1-1-3">Actions</h5>
+<div class="outline-text-5" id="text-1-1-1-3">
+</div><ul class="org-ul"><li><a id="sec-1-1-1-3-1" name="sec-1-1-1-3-1"></a>执行命令<br  /><div class="outline-text-6" id="text-1-1-1-3-1">
+<dl class="org-dl">
+<dt> <code>-delete</code> </dt><dd>删除文件, 如果删除成功返回 true.
+</dd>
+<dt> <code>-exec</code> <i>command</i> ; </dt><dd>执行命令 <i>command</i>, 如果返回状态为0则返回 true.  命令中
+的 <code>{}</code> 被替换为当前被处理的文件名. <code>;</code> 和 <code>{}</code> 可能需要转义以免被shell展开.
+</dd>
+<dt> <code>-exec</code> <i>command</i> <code>{}</code> + </dt><dd>这是 <code>-exec</code> 的变体, 通过在命令的结尾添加所选的文
+件名来构建命令行, 这个过程类似于 <code>xargs</code> 构建命令行的方式. 命令中只允许有一个 <code>{}</code>
+</dd>
+<dt> <code>-execdir</code> <i>command</i> ; </dt><dd>同下
+</dd>
+<dt> <code>-execdir</code> <i>command</i> ; </dt><dd>在子目录中运行命令
+</dd>
+<dt> <code>-ok</code> <i>command</i> ; </dt><dd>Like <code>-exec</code> but ask the user first.
+</dd>
+<dt> <code>-okdir</code> <i>command</i> ; </dt><dd>like <code>-execdir</code> and <code>-ok</code>
+</dd>
+</dl>
+</div>
+</li>
+
+<li><a id="sec-1-1-1-3-2" name="sec-1-1-1-3-2"></a>输出<br  /><div class="outline-text-6" id="text-1-1-1-3-2">
+<dl class="org-dl">
+<dt> <code>-ls</code> </dt><dd>在标准输出中以格式 <code>ls -dils</code> 输出当前文件
+</dd>
+<dt> <code>-print</code> </dt><dd>在标准输出输出文件全名, 以 newline 结束
+</dd>
+<dt> <code>-print0</code> </dt><dd>在标准输出输出文件全名, 以 null 结束
+</dd>
+<dt> <code>-printf</code> <i>format</i> </dt><dd>在标准输出输出 <i>format</i>, 其中解释 <code>\</code> 和 <code>%</code>
+     <i>format</i> 表格
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">格式串</th>
+<th scope="col" class="left">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">%a</td>
+<td class="left">最后访问时间, format 是 <code>C</code> 中函数 <code>ctime</code> 的返回值</td>
+</tr>
+
+<tr>
+<td class="left">%Ak</td>
+<td class="left">最后访问时间, <i>k</i> 表示格式</td>
+</tr>
+
+<tr>
+<td class="left">%b</td>
+<td class="left">该文件使用的硬盘空间</td>
+</tr>
+
+<tr>
+<td class="left">%c</td>
+<td class="left">文件状态的最后改变时间</td>
+</tr>
+
+<tr>
+<td class="left">%Ck</td>
+<td class="left">状态改变时间</td>
+</tr>
+
+<tr>
+<td class="left">%d</td>
+<td class="left">在路径中的深度</td>
+</tr>
+
+<tr>
+<td class="left">%D</td>
+<td class="left">设备号</td>
+</tr>
+
+<tr>
+<td class="left">%f</td>
+<td class="left">文件名</td>
+</tr>
+
+<tr>
+<td class="left">%F</td>
+<td class="left">文件系统类型</td>
+</tr>
+
+<tr>
+<td class="left">%g</td>
+<td class="left">文件的群组名</td>
+</tr>
+
+<tr>
+<td class="left">%G</td>
+<td class="left">数值群组 ID</td>
+</tr>
+
+<tr>
+<td class="left">%p</td>
+<td class="left">文件名</td>
+</tr>
+
+<tr>
+<td class="left">%t</td>
+<td class="left">最后修改时间</td>
+</tr>
+
+<tr>
+<td class="left">%Tk</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</dd>
+
+<dt> <code>-fls</code> <i>file</i> </dt><dd>返回true, 类似 <code>-ls</code> 但是写入 <i>file</i> 类似 <code>-fprint</code>
+</dd>
+<dt> <code>-fprint</code> <i>file</i> </dt><dd>输出全文件名到 <i>file</i>
+</dd>
+<dt> <code>-fprint0</code> <i>file</i> </dt><dd>类似 <code>-print0</code>
+</dd>
+<dt> <code>-fprintf</code> <i>file</i> <i>format</i>  </dt><dd>输出文件名到 <i>file</i>
+</dd>
+</dl>
+</div>
+</li></ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">xargs</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+根据标准输入构建和执行命令
+</p>
+</div>
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1">语法</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+xargs [-0prtx] [ -E <i>eof-str</i> ] [&#x2013;null] [ -d <i>delim</i> ] [ -I <i>replace-str</i> ] <br  />
+[ -L <i>max-lines</i> ] [ -n <i>max-args</i> ] [ -s <i>max-chars</i> ] [ -P <i>max-procs</i> ] [ &#x2013;process-slot-var=/name/ ] <br  />
+[ &#x2013;interactive ] [&#x2013;verbose] [&#x2013;exit] [&#x2013;no-run-if-empty] [&#x2013;arg-file=file] [&#x2013;show-limits] [&#x2013;version] <br  />
+[&#x2013;help] [ <i>command</i> [ <i>initial-arguments</i> ]] <br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">选项</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div><div id="outline-container-sec-1-2-2-1" class="outline-5">
+<h5 id="sec-1-2-2-1">输入相关选项</h5>
+<div class="outline-text-5" id="text-1-2-2-1">
+<dl class="org-dl">
+<dt> -0 &#x2013;null </dt><dd>输入项以空字符(null)结束
+</dd>
+<dt> -a <i>file</i>, &#x2013;arg-file=/file/  </dt><dd>从文件中读取而不是从标准输入
+</dd>
+<dt> &#x2013;delimiter=/delim/, -d <i>delim</i> </dt><dd>输入项以特定字符结束
+</dd>
+<dt> -E <i>eof-str</i> </dt><dd>设置文件的结束字符串
+</dd>
+<dt> -I <i>repalce-str</i> </dt><dd>设置替换字符串
+</dd>
+<dt> -r, &#x2013;no-run-if-empty </dt><dd>标准输入为空白时, 不运行命令.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2-2" class="outline-5">
+<h5 id="sec-1-2-2-2">限制相关选项</h5>
+<div class="outline-text-5" id="text-1-2-2-2">
+<dl class="org-dl">
+<dt> -L <i>max-lines</i> </dt><dd>每个命令行最多使用 <i>max-lines</i> 非空白输入
+</dd>
+<dt> -n <i>max-args</i>, &#x2013;max-args[=/max-lines/ ] </dt><dd>每个命令行的最多使用 <i>max-lines</i> 个参数
+</dd>
+<dt> -s <i>max-chars</i>, &#x2013;max-chars=/max-chars/ </dt><dd>每个命令行的最大字符数
+</dd>
+<dt> -P <i>max-proces</i>, &#x2013;max-procs=/max-procs/ </dt><dd>同时最多运行 <i>max-procs</i> 个进程, 默认为 1.
+如果 <i>mxa-procs</i> 为0， xargs 一次运行尽可能多的进程. 和 <code>-n</code> 或 <code>-L</code> 一起使用, 不然有可能
+只有一个进程会运行(只组合成一个命令行命令).
+</dd>
+<dt> &#x2013;show-limits  </dt><dd>显示操作系统的命令行极限, xargs 使用的缓冲大小和 <code>-s</code> 选项
+</dd>
+<dt> -x, &#x2013;exit </dt><dd>如果大小超限就退出
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-2-3" class="outline-5">
+<h5 id="sec-1-2-2-3">其他</h5>
+<div class="outline-text-5" id="text-1-2-2-3">
+<dl class="org-dl">
+<dt> &#x2013;process-slot-var=/name/ </dt><dd>Set the environment variable name to a unique value  in  each
+running  child  process. Values  are  reused  once child processes exit.
+</dd>
+
+<dt> -p, &#x2013;interactive </dt><dd>询问用户是否运行命令行并从终端读取一行, 只有当用户输入 <code>y</code> 或 <code>Y</code> 开头的
+字符串时才运行命令
+</dd>
+<dt> -t, &#x2013;verbose </dt><dd>在执行命令前打印命令道标准错误输出
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">流编辑器 sed</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+sed 是流编辑器(stream editor), 在一些方面类似于与 ed (行编辑器)
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4">awk</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+模式扫描和处理语言(pattern scanning and processing language)
+</p>
+</div>
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1">命令行选项</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<dl class="org-dl">
+<dt> -f <i>program-file</i>, &#x2013;file <i>program-file</i> </dt><dd>从文件中读取 AWK 源代码
+</dd>
+<dt> -F <i>fs</i>, &#x2013;field-separator <i>fs</i> </dt><dd>使用 <i>fs</i> 作为域分割符, 即更改预定义变量 <code>FS</code> 的值
+</dd>
+<dt> -v <i>var/=/val</i>, &#x2013;assign <i>var/=/val</i> </dt><dd>在程序执行前定义变量
+</dd>
+<dt> -d[ <i>file</i> ], &#x2013;dump-variables[=/file/ ] </dt><dd>输出排序的全局变量到文件
+</dd>
+<dt> -e <i>program-text</i>, &#x2013;source <i>program-text</i> </dt><dd>使用 <i>program-text</i> 作为源
+</dd>
+<dt> -E <i>file</i>, -exec <i>file</i> </dt><dd>和 <code>-f</code> 类似, 但最后处理
+</dd>
+</dl>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2">awk 语言</h4>
+<div class="outline-text-4" id="text-1-4-2">
+</div><div id="outline-container-sec-1-4-2-1" class="outline-5">
+<h5 id="sec-1-4-2-1">基础概念</h5>
+<div class="outline-text-5" id="text-1-4-2-1">
+<dl class="org-dl">
+<dt> 变量 (variables) </dt><dd>动态变量, 第一次使用时存在.
+</dd>
+<dt> 记录 (record) </dt><dd>单个连续长度的输入数据. 一般以换行符分割.
+用户可以改变内置变量  <code>RS</code> 更改默认设置.
+</dd>
+<dt> 字段 (field) </dt><dd>awk 使用 <code>FS</code> 把记录分割成字段. 可以使用 $1, $2
+代表记录中的字段, $0 代表整个记录. 变量 <code>NF</code> 表示记录重字段的总数
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="disqus_thread"></div>
+<script>
+(function () { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement ('script');
+          s.src = 'https://zzy-blog.disqus.com/embed.js';
+          s.setAttribute ('data-timestamp', +new Date ());
+          (d.head || d.body).appendChild (s);
+          }) ();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</body>
+</html>
