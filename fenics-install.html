@@ -4,11 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FEniCS-Install</title>
-<!-- 2017-04-16 Sun 10:08 -->
+<!-- 2017-04-16 Sun 12:19 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Yang Zongze" />
-<link rel="stylesheet" type="text/css" href="http://orgmode.org/worg/style/worg.css" />
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -57,7 +57,11 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
 <h1 class="title">FEniCS-Install</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -105,9 +109,9 @@ FEniCS镜像. <i>若使用其他版本镜像, 请自行修改相关命令</i>.
 <div class="org-src-container">
 
 <pre class="src src-sh">docker-machine ssh default
-sudo sed -i "s|EXTRA_ARGS='|EXTRA_ARGS='--registry-mirror=加速地址 \
-    |g" /var/lib/boot2docker/profile
-exit
+sudo sed -i <span style="color: #e6db74;">"s|EXTRA_ARGS='|EXTRA_ARGS='--registry-mirror=&#21152;&#36895;&#22320;&#22336; \</span>
+<span style="color: #e6db74;">    |g"</span> /var/lib/boot2docker/profile
+<span style="color: #f92672; background-color: #1b1d1e;">exit</span>
 docker-machine restart default
 </pre>
 </div>
@@ -124,9 +128,9 @@ FEniCS 镜像即可进入 FEniCS 开发环境. 另外我们也可以使用 Jupyt
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">docker run --name notebook -w /home/fenics -v $(pwd):/home/fenics/shared \
-    -d -p 127.0.0.1:8888:8888 fenicsproject/stable \
-    'jupyter-notebook --ip=0.0.0.0'
+<pre class="src src-sh">docker run --name notebook -w /home/fenics -v $<span style="color: #bebebe;">(</span><span style="color: #fa8072;">pwd</span><span style="color: #bebebe;">)</span>:/home/fenics/shared <span style="color: #e6db74;">\</span>
+    -d -p 127.0.0.1:8888:8888 fenicsproject/stable <span style="color: #e6db74;">\</span>
+    <span style="color: #e6db74;">'jupyter-notebook --ip=0.0.0.0'</span>
 </pre>
 </div>
 <p>
@@ -175,7 +179,7 @@ Linux 下有多种安装方式, 请参考官网介绍.
 FEniCS 需要使用 conda-forge 仓库, 可使用如命令
 <div class="org-src-container">
 
-<pre class="src src-sh">conda config --add channels \
+<pre class="src src-sh">conda config --add channels <span style="color: #e6db74;">\</span>
     https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/cloud/conda-forge/
 conda config --set show_channel_urls yes
 </pre>
@@ -202,12 +206,10 @@ conda config --set show_channel_urls yes
 <div class="outline-text-4" id="text-1-2-1">
 <ul class="org-ul">
 <li>使用命令 <code>docker run -ti fenicsproject/stable</code> 启动时, 有如下错误
-<div class="org-src-container">
-
-<pre class="src src-sh">panic: standard_init_linux.go:178: exec user process caused "permission denied" [recovered]
+<pre class="example">
+panic: standard_init_linux.go:178: exec user process caused "permission denied" [recovered]
         panic: standard_init_linux.go:178: exec user process caused "permission denied"
 </pre>
-</div>
 <p>
 需在命令上添加选项 <code>--privileged</code>, 即使用 <code>docker run --privileged -ti fenicsproject/stable</code>.
 </p>
@@ -224,15 +226,13 @@ conda config --set show_channel_urls yes
 </li>
 <li>在 CentOS 7 上使用自动构建脚本安装, 安装完成后除画图功能外, 其他功能正常.
 有如下错误
-<div class="org-src-container">
-
-<pre class="src src-sh">X Error of failed request:  GLXBadFBConfig
+<pre class="example">
+X Error of failed request:  GLXBadFBConfig
   Major opcode of failed request:  150 (GLX)
   Minor opcode of failed request:  34 ()
   Serial number of failed request:  41
   Current serial number in output stream:  40
 </pre>
-</div>
 <p>
 怀疑运行时OpenGL库出现异常, 运行时库和编译时库不匹配, 还未解决.
 </p>

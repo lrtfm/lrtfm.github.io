@@ -4,11 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Linux 常用命令</title>
-<!-- 2017-04-16 Sun 10:08 -->
+<!-- 2017-04-16 Sun 12:19 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Yang Zongze" />
-<link rel="stylesheet" type="text/css" href="http://orgmode.org/worg/style/worg.css" />
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -57,13 +57,17 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
 <h1 class="title">Linux 常用命令</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Shell 命令</a>
+<li><a href="#sec-1">Shell 命令 man 手册摘录翻译</a>
 <ul>
 <li><a href="#sec-1-1">搜索利器 find</a>
 <ul>
@@ -106,7 +110,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Shell 命令</h2>
+<h2 id="sec-1">Shell 命令 man 手册摘录翻译</h2>
 <div class="outline-text-2" id="text-1">
 </div><div id="outline-container-sec-1-1" class="outline-3">
 <h3 id="sec-1-1">搜索利器 find</h3>
@@ -182,9 +186,9 @@ for the JavaScript code in this tag.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-shell">&gt;find . -amin +5      #上次访问时间 &gt; 5min
-&gt;find . -amin -5      #上次访问时间 &lt; 5min
-&gt;find . -amin 5       #上次访问时间 &lt; 6min 并且 &gt; 5min
+<pre class="src src-sh">&gt;find . -amin +5      <span style="color: #8f8f8f;">#</span><span style="color: #8f8f8f;">&#19978;&#27425;&#35775;&#38382;&#26102;&#38388; &gt; 5min</span>
+&gt;find . -amin -5      <span style="color: #8f8f8f;">#</span><span style="color: #8f8f8f;">&#19978;&#27425;&#35775;&#38382;&#26102;&#38388; &lt; 5min</span>
+&gt;find . -amin 5       <span style="color: #8f8f8f;">#</span><span style="color: #8f8f8f;">&#19978;&#27425;&#35775;&#38382;&#26102;&#38388; &lt; 6min &#24182;&#19988; &gt; 5min</span>
 </pre>
 </div>
 </div>
