@@ -21,9 +21,10 @@
     }
     body #content {
 	padding-top: 0px;
-	max-width: 80%;
+	max-width: 900px;
 	min-width: 700px;
-	margin-left: 20px;
+	/*margin-left: 20px;*/
+	margin: 0 auto;
 	background-color: white;
 	padding: 2em;
 	/* box-shadow: 3px 3px 5px #888; */
@@ -936,8 +937,9 @@ content: "*** "
     #postamble {
 	font-size: 75%;
 	min-width: 700px;
-	max-width: 80%;
-	margin-left: 20px;
+	max-width: 900px;
+	/*margin-left: 20px;*/
+	margin:0 auto;
 	margin-top: 10px;
 	padding: .2em;
 	border: 1px solid gray;
