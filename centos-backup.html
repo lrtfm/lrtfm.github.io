@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>CentOS 单用户登录及文件备份</title>
+<!-- 2017-04-21 Fri 12:42 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Yang Zongze" />
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">CentOS 单用户登录及文件备份</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. CentOS 单用户登录</a>
+<ul>
+<li><a href="#sec-1-1">1.1. 问题描述</a></li>
+<li><a href="#sec-1-2">1.2. 进入单用户模式方法</a></li>
+<li><a href="#sec-1-3">1.3. 挂载 NTFS 格式移动硬盘</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. 挂载时出错</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4. 文件备份 (rsync 命令)</a></li>
+<li><a href="#sec-1-5">1.5. 关于硬盘问题</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> CentOS 单用户登录</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 问题描述</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+实验室一台工作站启动时停在 <code>automount</code> 处, 显示
+</p>
+<div class="org-src-container">
+
+<pre class="src src-text">Starting automount:
+</pre>
+</div>
+<p>
+按 <code>Ctrl+Alt+F1</code> 后屏幕不断输出如下信息
+</p>
+<div class="org-src-container">
+
+<pre class="src src-text">RCT: pd 2 tree, access 0x046fcf count 0x8 hit mode 0x846fcf count  0x1.
+Disk Access Error (ffffc20010479bb8, 2, LBA 846fcf, Sector 8, Status 7)
+RCT: pd 2 tree, access 0x046fcf count 0x1 hit mode 0x846fcf count  0x1.
+Disk Access Error (ffffc20010479ff8, 2, LBA 846fcf, Sector 1, Status 7)
+MV Sense: response 70 SK SCSI_SK_NO_SENSE ASC 0 ASCQ 0.
+</pre>
+</div>
+<p>
+不断的输出重仅有 <code>ffffc200********</code> 部分有所变化.
+</p>
+
+<p>
+应该是硬盘出现了问题, 导致 <code>automount</code> 不能挂载相应文件系统.
+尝试进入单用户模式, 挂在移动硬盘, 并备份数据.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 进入单用户模式方法</h3>
+<div class="outline-text-3" id="text-1-2">
+<ol class="org-ol">
+<li>系统引导时安任意键进入 <code>grub</code> 引导界面.
+</li>
+<li>选择需要引导的内核, 按 <code>e</code> 进入编辑模式.
+</li>
+<li>选择 <code>kernel</code> 行, 按 <code>e</code> 进行编辑.
+</li>
+<li>在行尾添加 <code>single</code>, 按回车确认改动.
+</li>
+<li>按 <code>b</code> 启动内核.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> 挂载 NTFS 格式移动硬盘</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+由于默认 CentOS 不能识别 NTFS 格式文件系统, 需要安装相应驱动方可挂载.
+下载和系统相应的 <code>ntfs-3g</code> 安装包, 通过 FAT 格式U盘安装, 安装命令如下.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">rpm -Uvh ntfs-3g-xxx.rpm
+</pre>
+</div>
+
+<p>
+命令参数说明
+<code>-U</code> :: This upgrades or installs the package currently installed to a
+        newer version. This is the same as install, except all other
+        version(s) of the package are removed after the new package is
+        installed.
+<code>-v</code> :: Print verbose information - normally routine progress messages
+        will be displayed.
+<code>-h</code> :: Print 50 hash marks as the package archive is unpacked. Use with
+        <code>-v</code> for a nicer display.
+</p>
+
+<p>
+驱动安装成功后即可挂载相应的目录, 首先建立挂在点目录 <code>/root/backup</code>, 然后
+挂载移动硬盘某分区到该目录(<code>/dev/sdxx</code> 请替换为相应分区).
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir /root/backup
+mount -t ntfs /dev/sdxx /root/backup
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> 挂载时出错</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+运行上述命令后可能显示如下不能挂载的错误
+</p>
+<div class="org-src-container">
+
+<pre class="src src-text">mount: /dev/sdxx is already mounted or /root/backup busy
+</pre>
+</div>
+
+<p>
+查看文件 /dev/sdxx 是否确实已经挂载, 以及 <code>/root/backup</code> 是否正忙(<code>fuser</code> 可以
+查看使用该文件的进程, 请参考 <code>man</code> 手册; <code>lsof</code> 可以查看打开的文件).
+如果不存在上述问题, 可以考虑使用 =dmsetup=<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> 解决
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">dmsetup status
+dmsetup remove_all
+dmsetup status
+</pre>
+</div>
+<p>
+第1行和第3行为查询语句, 无害. 第2句 <code>dmsetup remove_all</code> 请谨慎使用, 或使用
+<code>dmsetup remove &lt;device_name&gt;</code>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> 文件备份 (rsync 命令)</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+在该工作站上, 只有 <code>/home</code> 目录有重要文件, 只需备份该目录. 下面命令
+可以显示拷贝进度, 可以在中断后继续拷贝.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">rsync -avzh -P --append-verify /home /root/backup
+</pre>
+</div>
+<p>
+命令参数说明
+<code>-a</code> :: archive mode; equals <code>-rlptgoD</code> (no <code>-H</code>, <code>-A</code>, <code>-X</code>)
+<code>-v</code> :: increase verbosity
+<code>-z</code> :: compress file data during the transfer
+<code>-h</code> :: output numbers in a human-readable format
+<code>--progress</code> :: show progress during transfer
+<code>--partial</code> :: keep partially transferred files
+<code>-P</code>  :: same as <code>--partial</code> <code>--progress</code>
+<code>--exclude=PATTERN</code> :: exclude files matching PATTERN
+<code>--exclude-from=FILE</code> :: read exclude patterns from FILE
+<code>--append</code> :: This causes rsync to update a file by
+              appending data onto the end of the file, which presumes
+              that the data that already exists  on the  receiving side
+              is identical with the start of the file on the sending side.
+<code>--append-verify</code> :: This works just like the &#x2013;append option, but the existing
+                     data on the receiving side is included in the full-file
+                     checksum verifi-cation step, which will cause a file to be
+                     resent if the  final  verification  step  fails.
+</p>
+
+<p>
+关于选项的更多信息, 请参考 <code>man rsync</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> 关于硬盘问题</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+未知原因, 未解决, <i>TODO</i>.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<a href="http://www.linuxcommand.org/man_pages/dmsetup8.html">dmsetup</a> - low level logical volume management
+</p></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="disqus_thread"></div>
+<script>
+(function () { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement ('script');
+          s.src = 'https://zzy-blog.disqus.com/embed.js';
+          s.setAttribute ('data-timestamp', +new Date ());
+          (d.head || d.body).appendChild (s);
+          }) ();
+</script>
+<noscript>
+  Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<script>
+(function (i,s,o,g,r,a,m){i ['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i [r].q=i [r].q|| []).push (arguments)},i [r].l=1*new Date ();a=s.createElement(o),
+          m=s.getElementsByTagName (o) [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          }) (window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga ('create', 'UA-97378735-1', 'auto');
+ga ('send', 'pageview');
+</script>
+</div>
+</body>
+</html>
