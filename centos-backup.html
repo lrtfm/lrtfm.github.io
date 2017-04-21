@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>CentOS 单用户登录及文件备份</title>
-<!-- 2017-04-21 Fri 12:42 -->
+<!-- 2017-04-21 Fri 12:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Yang Zongze" />
@@ -71,13 +71,17 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1-1">1.1. 问题描述</a></li>
 <li><a href="#sec-1-2">1.2. 进入单用户模式方法</a></li>
-<li><a href="#sec-1-3">1.3. 挂载 NTFS 格式移动硬盘</a>
-<ul>
-<li><a href="#sec-1-3-1">1.3.1. 挂载时出错</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-4">1.4. 文件备份 (rsync 命令)</a></li>
-<li><a href="#sec-1-5">1.5. 关于硬盘问题</a></li>
+<li><a href="#sec-2">2. 文件备份</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 挂载 NTFS 格式移动硬盘</a>
+<ul>
+<li><a href="#sec-2-1-1">2.1.1. 挂载时出错</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-2">2.2. 文件备份 (rsync 命令)</a></li>
+<li><a href="#sec-2-3">2.3. 关于硬盘问题</a></li>
 </ul>
 </li>
 </ul>
@@ -138,10 +142,14 @@ MV Sense: response 70 SK SCSI_SK_NO_SENSE ASC 0 ASCQ 0.
 </ol>
 </div>
 </div>
+</div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> 挂载 NTFS 格式移动硬盘</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 文件备份</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 挂载 NTFS 格式移动硬盘</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 由于默认 CentOS 不能识别 NTFS 格式文件系统, 需要安装相应驱动方可挂载.
 下载和系统相应的 <code>ntfs-3g</code> 安装包, 通过 FAT 格式U盘安装, 安装命令如下.
@@ -176,9 +184,9 @@ mount -t ntfs /dev/sdxx /root/backup
 </div>
 </div>
 
-<div id="outline-container-sec-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> 挂载时出错</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> 挂载时出错</h4>
+<div class="outline-text-4" id="text-2-1-1">
 <p>
 运行上述命令后可能显示如下不能挂载的错误
 </p>
@@ -208,9 +216,9 @@ dmsetup status
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> 文件备份 (rsync 命令)</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 文件备份 (rsync 命令)</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 在该工作站上, 只有 <code>/home</code> 目录有重要文件, 只需备份该目录. 下面命令
 可以显示拷贝进度, 可以在中断后继续拷贝.
@@ -247,9 +255,9 @@ dmsetup status
 </div>
 </div>
 
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> 关于硬盘问题</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> 关于硬盘问题</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 未知原因, 未解决, <i>TODO</i>.
 </p>
