@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>TeX Command</title>
+<!-- 2017-12-06 Wed 05:14 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Yang Zongze" />
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">TeX Command</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. \TeX 学习笔记</a>
+<ul>
+<li><a href="#sec-1-1">1.1. 字符</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. 字符分类</a></li>
+<li><a href="#sec-1-1-2">1.1.2. 字符表示方式</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. <code>\if...</code> 命令</a></li>
+<li><a href="#sec-1-3">1.3. <code>\def</code></a></li>
+<li><a href="#sec-1-4">1.4. <code>\expandafter</code>, <code>\noexpand</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> \TeX 学习笔记</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 字符</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> 字符分类</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">Category</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">0</td>
+<td class="left">Escape character</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Beginning of group</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Math shift</td>
+</tr>
+
+<tr>
+<td class="right">3</td>
+<td class="left">Alignment tab</td>
+</tr>
+
+<tr>
+<td class="right">5</td>
+<td class="left">End of line</td>
+</tr>
+
+<tr>
+<td class="right">6</td>
+<td class="left">Parameter</td>
+</tr>
+
+<tr>
+<td class="right">7</td>
+<td class="left">Superscript</td>
+</tr>
+
+<tr>
+<td class="right">8</td>
+<td class="left">Subscript</td>
+</tr>
+
+<tr>
+<td class="right">9</td>
+<td class="left">Ignored character</td>
+</tr>
+
+<tr>
+<td class="right">10</td>
+<td class="left">Space</td>
+</tr>
+
+<tr>
+<td class="right">11</td>
+<td class="left">Letter</td>
+</tr>
+
+<tr>
+<td class="right">12</td>
+<td class="left">Other character</td>
+</tr>
+
+<tr>
+<td class="right">13</td>
+<td class="left">Active character</td>
+</tr>
+
+<tr>
+<td class="right">14</td>
+<td class="left">Comment character</td>
+</tr>
+
+<tr>
+<td class="right">15</td>
+<td class="left">Invalid character</td>
+</tr>
+</tbody>
+</table>
+
+<dl class="org-dl">
+<dt> <code>\catcode</code> </dt><dd>修改字符的分类(Category), 如 <code>\catcode`\{=1</code> 把符号 <code>{</code> 的分类改为 1.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> 字符表示方式</h4>
+<div class="outline-text-4" id="text-1-1-2">
+</div><ol class="org-ol"><li><a id="sec-1-1-2-1" name="sec-1-1-2-1"></a>可见字符<br  /><div class="outline-text-5" id="text-1-1-2-1">
+<p>
+直接可用键盘输入, 如 <code>A</code>, <code>B</code>, <code>C</code> 等.
+</p>
+</div>
+</li>
+<li><a id="sec-1-1-2-2" name="sec-1-1-2-2"></a>不可见字符<br  /><div class="outline-text-5" id="text-1-1-2-2">
+<dl class="org-dl">
+<dt> <code>\char</code> </dt><dd>使用 <code>\char&lt;number&gt;</code> 可以得到任何你想要的字符, 这里 <code>&lt;number&gt;</code> 可以是从0到255的任意整数, 如 <code>\char98</code> 表示 <code>b</code>.
+</dd>
+<dt> <code>`</code> (left quote) </dt><dd>其后接任意字符或单字符控制序列表示该字符的 \TeX 内部码. 例如 <code>\char`b</code> 和 <code>\char`\b</code> 等价于 <code>\char98</code>.
+</dd>
+</dl>
+</div>
+</li></ol>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> <code>\if...</code> 命令</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+语法: <code>\if&lt;condition&gt;&lt;true text&gt;\else&lt;false text&gt;\fi</code>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">命令</th>
+<th scope="col" class="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>\ifnum&lt;number1&gt;&lt;relation&gt;&lt;number2&gt;</code></td>
+<td class="left">compare two integers</td>
+</tr>
+
+<tr>
+<td class="left"><code>\ifdim&lt;dimen1&gt;&lt;relation&gt;&lt;dimen2&gt;</code></td>
+<td class="left">compare two dimensions</td>
+</tr>
+
+<tr>
+<td class="left"><code>\if&lt;token1&gt;&lt;token2&gt;</code></td>
+<td class="left">test if character codes agree</td>
+</tr>
+
+<tr>
+<td class="left"><code>\ifcat&lt;token1&gt;&lt;token2&gt;</code></td>
+<td class="left">test if category codes agree</td>
+</tr>
+
+<tr>
+<td class="left"><code>\ifx&lt;token1&gt;token2&gt;</code></td>
+<td class="left">test if tokens agree</td>
+</tr>
+
+<tr>
+<td class="left"><code>\iftrue, \iffalse</code></td>
+<td class="left">always true or always false</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+多支条件语句: <code>\ifcase&lt;number&gt;&lt;text for case 0&gt;\or&lt;textfor case 1&gt;\or...\or&lt;text for case n&gt;\else&lt;text for all other cases&gt;\fi</code>
+</p>
+
+<dl class="org-dl">
+<dt> <code>\newif</code> </dt><dd>新建 <code>\if...</code> 结构. 如 <code>\newif\ifabc</code> 会生成三个宏: <code>\ifabc</code> 用于测试条件真假, <code>\abctrue</code> 设置条件为真, <code>\abcfalse</code> 设置条件为假.
+</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> <code>\def</code></h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+语法: <code>\def\newcs{replacement text}</code>
+</p>
+
+<p>
+在语法说明中, 大括号是必须的, 并不表示分组, 新的命令 <code>\newcs</code> 不包含大括号. 若要包含大括号, 可以如下定义 <code>\def\newcs{{replacement text}}</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> <code>\expandafter</code>, <code>\noexpand</code></h3>
+<div class="outline-text-3" id="text-1-4">
+<dl class="org-dl">
+<dt> <code>\expandafter&lt;token&gt;</code> </dt><dd>先不展开其后面的宏, 并读取后面的内容, 然后再展开其后面的宏, 并插入在应有的位置.
+</dd>
+<dt> <code>\noexpand&lt;token&gt;</code> </dt><dd>其展开是其后 token 自身.
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="disqus_thread"></div>
+<script>
+(function () { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement ('script');
+          s.src = 'https://zzy-blog.disqus.com/embed.js';
+          s.setAttribute ('data-timestamp', +new Date ());
+          (d.head || d.body).appendChild (s);
+          }) ();
+</script>
+<noscript>
+  Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<script>
+(function (i,s,o,g,r,a,m){i ['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i [r].q=i [r].q|| []).push (arguments)},i [r].l=1*new Date ();a=s.createElement(o),
+          m=s.getElementsByTagName (o) [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          }) (window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga ('create', 'UA-97378735-1', 'auto');
+ga ('send', 'pageview');
+</script>
+</div>
+</body>
+</html>
