@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>FEniCS-Install</title>
-<!-- 2017-09-18 Mon 13:52 -->
+<!-- 2018-03-27 Tue 10:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Yang Zongze" />
@@ -167,7 +167,7 @@ Docker 下载地址: <a href="http://get.daocloud.io/#install-docker-for-mac-win
 <pre class="src src-sh">docker-machine ssh default
 sudo sed -i <span style="color: #e6db74;">"s|EXTRA_ARGS='|EXTRA_ARGS='--registry-mirror=&#21152;&#36895;&#22320;&#22336; \</span>
 <span style="color: #e6db74;">    |g"</span> /var/lib/boot2docker/profile
-<span style="color: #f92672; background-color: #1b1d1e;">exit</span>
+<span style="color: #50ffff;">exit</span>
 docker-machine restart default
 </pre>
 </div>
@@ -233,7 +233,7 @@ docker-machine restart default
 
 <pre class="src src-sh">jupyter notebook --generate-config
 jupyter notebook password
-<span style="color: #f92672; background-color: #1b1d1e;">exit</span>
+<span style="color: #50ffff;">exit</span>
 </pre>
 </div>
 </li>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>TikZ 语法</title>
+<!-- 2018-03-27 Tue 11:48 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Yang Zongze" />
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">TikZ 语法</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. TikZ 使用介绍</a>
+<ul>
+<li><a href="#sec-1-1">1.1. 语法</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. 点的表示 (坐标表示)</a></li>
+<li><a href="#sec-1-1-2">1.1.2. 路径 (Path) 的表示以及对路径的操作</a></li>
+<li><a href="#sec-1-1-3">1.1.3. 节点 (Nodes) 的表示</a></li>
+<li><a href="#sec-1-1-4">1.1.4. 树和图的语法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> TikZ 使用介绍</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 语法</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> 点的表示 (坐标表示)</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li>绝对位置
+<ul class="org-ul">
+<li>直角坐标表示 \((x,y)\), 例如 \((1cm, 2pt)\), \((1, 2pt)\).
+</li>
+<li>极坐标表示 \((\theta, \rho)\), 例如 \((30:1cm)\), \((120:1cm)\).
+</li>
+</ul>
+</li>
+<li>相对位置
+<dl class="org-dl">
+<dt> \(++(dx,dy)\) </dt><dd>使用两个加号表示相对于最后使用的坐标点的位置 \(++(dx,dy)\),
+例如 \(++(1cm, 0)\).
+</dd>
+<dt> \(+(dx,dy)\) </dt><dd>和 \(++(dx,dy)\) 类似, 只是不改变后续相对位置坐标的基准点.
+如 \((1,0) +(1,0) +(0,1)\) 表示 \((1,0)\), \((2,0)\) 和 \((1,1)\).
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> 路径 (Path) 的表示以及对路径的操作</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+路径是一系列的直线或曲线. TikZ 使用类似于 MetaPost 的语法表示路径.
+我们可以 画(draw), 填充(fill), 阴影化(shade) 以及 剪切(clip)路径.
+例如,
+</p>
+<ul class="org-ul">
+<li><code>\path (0,0) rectangele (2ex,1ex);</code>,
+</li>
+<li><code>\path[draw] (0,0) rectangle (2ex,1ex)</code>
+</li>
+<li><code>\path[fill]</code>
+</li>
+<li><code>\path[clip]</code>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> 节点 (Nodes) 的表示</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+该表示可用于向图片中添加文本. 节点插入在当前路径上的当前位置.
+例如,
+</p>
+<ul class="org-ul">
+<li><code>\draw (1, 1) node {text} -- (2,2);</code>
+</li>
+<li><code>\draw (1, 1) node[circle, draw] {text};</code>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> 树和图的语法</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<ul class="org-ul">
+<li>树的表示
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #50ffff;">\begin</span><span style="color: #bebebe;">{</span><span style="color: #a6e22e;">tikzpicture</span><span style="color: #bebebe;">}</span>
+        <span style="color: #87ceff;">\node</span> <span style="color: #bebebe;">{</span>root<span style="color: #bebebe;">}</span>
+              child <span style="color: #bebebe;">{</span>node <span style="color: #daa520;">{</span>left<span style="color: #daa520;">}</span><span style="color: #bebebe;">}</span>
+              child <span style="color: #bebebe;">{</span>node <span style="color: #daa520;">{</span>right<span style="color: #daa520;">}</span>
+                    child <span style="color: #daa520;">{</span>node <span style="color: #ffd700;">{</span>child<span style="color: #ffd700;">}</span><span style="color: #daa520;">}</span>
+                    child <span style="color: #daa520;">{</span>node <span style="color: #ffd700;">{</span>child<span style="color: #ffd700;">}</span><span style="color: #daa520;">}</span>
+              <span style="color: #bebebe;">}</span>;
+<span style="color: #50ffff;">\end</span><span style="color: #bebebe;">{</span><span style="color: #a6e22e;">tikzpicture</span><span style="color: #bebebe;">}</span>
+</pre>
+</div>
+</li>
+<li>图的表示
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-latex"><span style="color: #50ffff;">\begin</span><span style="color: #bebebe;">{</span><span style="color: #a6e22e;">tikzpicture</span><span style="color: #bebebe;">}</span>
+        <span style="color: #87ceff;">\graph</span> <span style="color: #bebebe;">[</span>grow down, branch right<span style="color: #bebebe;">]</span> <span style="color: #bebebe;">{</span>
+               root -&gt; <span style="color: #daa520;">{</span> left, right -&gt; <span style="color: #ffd700;">{</span>child, child<span style="color: #ffd700;">}</span> <span style="color: #daa520;">}</span>
+        <span style="color: #bebebe;">}</span>;
+<span style="color: #50ffff;">\end</span><span style="color: #bebebe;">{</span><span style="color: #a6e22e;">tikzpicture</span><span style="color: #bebebe;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="disqus_thread"></div>
+<script>
+(function () { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement ('script');
+          s.src = 'https://zzy-blog.disqus.com/embed.js';
+          s.setAttribute ('data-timestamp', +new Date ());
+          (d.head || d.body).appendChild (s);
+          }) ();
+</script>
+<noscript>
+  Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<script>
+(function (i,s,o,g,r,a,m){i ['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i [r].q=i [r].q|| []).push (arguments)},i [r].l=1*new Date ();a=s.createElement(o),
+          m=s.getElementsByTagName (o) [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          }) (window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga ('create', 'UA-97378735-1', 'auto');
+ga ('send', 'pageview');
+</script>
+</div>
+</body>
+</html>
