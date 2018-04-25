@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>ubuntu 16.04 初始环境配置</title>
+<!-- 2018-04-25 Wed 17:22 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Yang Zongze" />
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="sitemap.html"> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="content">
+<h1 class="title">ubuntu 16.04 初始环境配置</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. ubuntu 16.04 LTS 初始环境配置</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Nvidia 显卡驱动的安装</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. <del>编译安装(失败&#x2026;)</del></a></li>
+<li><a href="#sec-1-1-2">1.1.2. 使用软件源安装</a></li>
+<li><a href="#sec-1-1-3">1.1.3. <del>安装 CUDA (还没安装&#x2026;)</del></a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. Matlab 安装</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. 遇到的问题及解决方法</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3. Shadowsocks 客户端 (shadowsocks-Qt5)</a></li>
+<li><a href="#sec-1-4">1.4. 中文输入法</a></li>
+<li><a href="#sec-1-5">1.5. Emacs 安装</a></li>
+<li><a href="#sec-1-6">1.6. OneDrive</a>
+<ul>
+<li><a href="#sec-1-6-1">1.6.1. onedrived-dev</a></li>
+<li><a href="#sec-1-6-2">1.6.2. OneDrive free client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> ubuntu 16.04 LTS 初始环境配置</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+下载 Ubuntu 16.04 LTS 进行安装 (下载 iso 镜像, 使用 UltraISO 写入 U 盘,
+开机从 U 盘启动即可安装). 安装过程并没有什么问题, 主要安装完成后初始环境的配置, 包括显卡驱
+动, 输入法, 常用软件的安装等. 本文主要是记录下配置过程中的一些问题.
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Nvidia 显卡驱动的安装</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+有多种方式进行显卡驱动安装
+</p>
+</div>
+<div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> <del>编译安装(失败&#x2026;)</del></h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+<del>这里我们使用 Nvidia 提供的 <code>.run</code> 文件进行编译安装.</del>
+</p>
+</div>
+<ol class="org-ol"><li><a id="sec-1-1-1-1" name="sec-1-1-1-1"></a><del>准备</del><br  /><div class="outline-text-5" id="text-1-1-1-1">
+<dl class="org-dl">
+<dt> Nvidia 显卡驱动 </dt><dd><del>根据显卡型号到 Nvidia 官网最新驱动文件(<code>.run</code> 文件).</del>
+</dd>
+<dt> Linux Headers </dt><dd><del>Linux 头文件, 编译需要.</del>
+</dd>
+<dt> GCC </dt><dd><del>由于 <code>.run</code> 文件需要 <code>gcc</code> 进行编译, 可更新系统到最新版本, 以防止版本过低.</del>
+</dd>
+</dl>
+</div>
+</li>
+<li><a id="sec-1-1-1-2" name="sec-1-1-1-2"></a><del>问题</del><br  /><div class="outline-text-5" id="text-1-1-1-2">
+<p>
+<b>由于以下问题未能解决, 中就还是放弃了使用 <code>.run</code> 文件安装的方式.</b>
+</p>
+<ul class="org-ul">
+<li><del>启动 <code>Nvidia X Server Settings</code> 时出现如下警告</del>
+<div class="org-src-container">
+
+<pre class="src src-text">You do not appear to be using the NVIDIA X driver. Please edit your X
+configuration file (just run `nvidia-xconfig` as root), and restart the X server.
+</pre>
+</div>
+</li>
+<li><del>Nvidia 驱动未加载</del>
+<div class="org-src-container">
+
+<pre class="src src-text">Graphics:  Card-1: Intel Device 591b
+           Card-2: NVIDIA Device 1c8d
+           Display Server: X.Org 1.18.4 drivers: nouveau,intel (unloaded: fbdev,vesa) FAILED: nvidia
+           Resolution: 1920x1080@60.05hz
+           GLX Renderer: Mesa DRI Intel HD Graphics 630 (Kaby Lake GT2) GLX Version: 3.0 Mesa 17.2.8
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> 使用软件源安装</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+参考: <a href="https://www.jianshu.com/p/4ee56646aa77">https://www.jianshu.com/p/4ee56646aa77</a>
+</p>
+<ul class="org-ul">
+<li>添加软件源
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+</pre>
+</div>
+</li>
+<li>准备
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo apt-get remove --purge nvidia-*
+sudo apt-get autoremove
+sudo apt-get install -f
+sudo reboot
+</pre>
+</div>
+</li>
+<li>安装
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo service lightdm stop  <span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">or sudo systemctl stop lightdm.service</span>
+sudo apt-get install nvidia-390
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> <del>安装 CUDA (还没安装&#x2026;)</del></h4>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Matlab 安装</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+直接加载 iso 文件, 按照提示进行安装即可.
+</p>
+</div>
+<div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> 遇到的问题及解决方法</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<dl class="org-dl">
+<dt> 问题 </dt><dd>在锁定到启动栏 (Lock to Launcher)后, 点击图标不能启动 Matlab (启动画面一闪而过).
+</dd>
+
+<dt> 解决方法 </dt><dd>找到 Matlab 对应的 <code>.desktop</code> 文件 (目录 <code>~/.local/share/applications</code> 下), 在 <code>Exec</code> 行
+添加命令行选项 <code>-desktop</code>.
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #e7c547;">Exec</span>=/usr/local/MATLAB/R2016b/bin/matlab -desktop
+</pre>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Shadowsocks 客户端 (shadowsocks-Qt5)</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+从发布地址 <a href="https://github.com/shadowsocks/shadowsocks-qt5/releases">ss-qt5-Release</a> 下载 <code>.AppImage</code> 即可运行.
+但是通过 <code>Setting-&gt;General Setting-&gt;Start at login</code> 并不能在登录时启动 ss-qt5. 可以通过 Ubuntu 的
+<code>Startup Application</code> 来进行添加.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> 中文输入法</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+两种不同的方式
+</p>
+<ul class="org-ul">
+<li>fcitx <a href="https://blog.csdn.net/G_66_hero/article/details/77603831">参考链接</a>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo apt install fcitx-googlepinyin
+</pre>
+</div>
+</li>
+<li>ibus <a href="https://blog.csdn.net/suxiang198/article/details/52040283">参考链接</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Emacs 安装</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+安装 Emacs25 (参考: <a href="http://wikemacs.org/wiki/Installing_Emacs_on_GNU/Linux#Emacs_25">Installing-Emacs-on-GNU/Linux</a>)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo apt-add-repository -y ppa:adrozdoff/emacs
+sudo apt install emacs25
+</pre>
+</div>
+<p>
+安装完成后, 在 Emacs (GUI) 中输入法无效, 即不能输入中文. 搜索后发现, 是因为环境变量的问题, 需要
+在 <code>~/.xprofile</code> 中设置 <code>LC_CTYPE=zh_CN.UTF-8</code>, 才可以正常输入中文. 不过这样是全局更改,
+我们希望只设置 Emacs 的环境变量. 搜索找到两种解决方法:
+</p>
+<ol class="org-ol">
+<li><del>在 unity application launcher 中设置环境变量</del> (经尝试, 无效, 待确认)
+<del>参考: <a href="https://superuser.com/questions/444841/set-environment-variable-for-unity-application-launcher">set-environment-variable-for-unity-application-launcher</a></del>
+</li>
+<li>给 Emacs 添加 Wrapper
+参考: <a href="https://askubuntu.com/questions/144968/set-variable-in-desktop-file/923393#923393">set-variable-in-desktop-file</a>
+<div class="org-src-container">
+
+<pre class="src src-sh">yzz@dell:~$ cat /usr/bin/emacs25.env
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">!/bin/sh</span>
+<span style="color: #e7c547;">LC_CTYPE</span>=zh_CN.UTF-8
+<span style="color: #c397d8;">export</span> LC_CTYPE
+<span style="color: #b9ca4a;">exec</span> /usr/bin/emacs25 <span style="color: #70c0b1;">"$@"</span>
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> OneDrive</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+以下表格摘自 <a href="https://linuxnewbieguide.org/onedrive-client-linux/">Is there a OneDrive client for Linux?</a>
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">名称</th>
+<th scope="col" class="left">网址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">OneDrive Official website</td>
+<td class="left"><a href="https://onedrive.live.com/">https://onedrive.live.com/</a></td>
+</tr>
+
+<tr>
+<td class="left">Rclone for OneDrive</td>
+<td class="left"><a href="https://rclone.org/onedrive">https://rclone.org/onedrive</a></td>
+</tr>
+
+<tr>
+<td class="left">DAVFS2 via WebDAV Protocol</td>
+<td class="left"><a href="http://savannah.nongnu.org/projects/davfs2">http://savannah.nongnu.org/projects/davfs2</a></td>
+</tr>
+
+<tr>
+<td class="left">OneDrive free client</td>
+<td class="left"><a href="https://github.com/skilion/onedrive">https://github.com/skilion/onedrive</a></td>
+</tr>
+
+<tr>
+<td class="left">onedrived-dev</td>
+<td class="left"><a href="https://github.com/xybu/onedrived-dev">https://github.com/xybu/onedrived-dev</a></td>
+</tr>
+
+<tr>
+<td class="left">GNOME 3 Desktop</td>
+<td class="left"><a href="http://www.gnome.org">http://www.gnome.org</a></td>
+</tr>
+
+<tr>
+<td class="left">KDE Desktop</td>
+<td class="left"><a href="http://www.kde.org/">http://www.kde.org/</a></td>
+</tr>
+
+<tr>
+<td class="left">SPFileZilla (mod)</td>
+<td class="left"><a href="https://github.com/suoko/spfilezilla">https://github.com/suoko/spfilezilla</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-sec-1-6-1" class="outline-4">
+<h4 id="sec-1-6-1"><span class="section-number-4">1.6.1</span> onedrived-dev</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+我安装了 <a href="https://github.com/xybu/onedrived-dev">onedrived-dev</a>, 其中一个坑是需要下载 <a href="https://ngrok.com/">ngrok</a> 而不是使用 ubuntu 的源进行安装.
+在使用过程中发现以下问题
+</p>
+<ul class="org-ul">
+<li>有些目录未能同步, 在该目录新建文件后, 能够触发同步.
+</li>
+<li>远程更改后, 不能及时同步到本地.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-6-2" class="outline-4">
+<h4 id="sec-1-6-2"><span class="section-number-4">1.6.2</span> OneDrive free client</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+后面考虑尝试.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id=\"disqus_thread\"></div>
+<script>
+(function () { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement ('script');
+          s.src = 'https://zzy-blog.disqus.com/embed.js';
+          s.setAttribute ('data-timestamp', +new Date ());
+          (d.head || d.body).appendChild (s);
+          }) ();
+</script>
+<noscript>
+  Please enable JavaScript to view the
+  <a href=\"https://disqus.com/?ref_noscript\">comments powered by Disqus.</a>
+</noscript>
+<script>
+(function (i,s,o,g,r,a,m){i ['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i [r].q=i [r].q|| []).push (arguments)},i [r].l=1*new Date ();a=s.createElement(o),
+          m=s.getElementsByTagName (o) [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          }) (window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga ('create', 'UA-97378735-1', 'auto');
+ga ('send', 'pageview');
+</script>
+</div>
+</body>
+</html>
